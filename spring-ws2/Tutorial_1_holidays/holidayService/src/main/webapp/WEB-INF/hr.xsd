@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://mycompany.com/hr/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="HolidayRequest" type="hr:HolidayRequestType" xmlns:hr="http://mycompany.com/hr/schemas"/>
+  <xs:complexType name="HolidayRequestType">
+    <xs:sequence>
+      <xs:element type="hr:HolidayType" name="Holiday" xmlns:hr="http://mycompany.com/hr/schemas"/>
+      <xs:element type="hr:EmployeeType" name="Employee" xmlns:hr="http://mycompany.com/hr/schemas"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HolidayType">
+    <xs:all>
+      <xs:element type="xs:date" name="StartDate"/>
+      <xs:element type="xs:date" name="EndDate"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="EmployeeType">
+    <xs:sequence>
+      <xs:element type="xs:integer" name="Number"/>
+      <xs:element type="xs:string" name="FirstName"/>
+      <xs:element type="xs:string" name="LastName"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
