@@ -1,4 +1,4 @@
-package com.mycompany.hr.holidayService;
+package com.mycompany.hr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.mycompany.hr.holidayService.hr;
+package com.mycompany.hr.ws;
 
-import com.mycompany.hr.holidayService.hr.service.HumanResourceService;
+import com.mycompany.hr.service.HumanResourceService;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.Namespace;

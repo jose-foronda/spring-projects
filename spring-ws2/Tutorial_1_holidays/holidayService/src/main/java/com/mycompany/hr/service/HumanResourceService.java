@@ -1,4 +1,4 @@
-package com.mycompany.hr.holidayService.hr.service;
+package com.mycompany.hr.service;
 
 
 import java.util.Date;
