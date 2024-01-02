@@ -1,25 +1,30 @@
 package com.mycompany.hr.config;
 
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.ws.config.annotation.EnableWs;
+import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
-import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
+import java.util.Properties;
+
+@EnableWs
 @Configuration
-public class SpringWebService {
-//    @Bean
-//    public DefaultWsdl11Definition holiday() {
-//        DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
-//        definition.setPortTypeName("HumanResource");
-//        definition.setLocationUri("http://localhost:8080/holidayService/");
-//        definition.setSchema(new SimpleXsdSchema(new ClassPathResource("hr.xsd")));
-//
-//        return definition;
-//    }
+public class SpringWebServiceConfig {
 
     @Bean
+    public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
+        MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+        servlet.setApplicationContext(applicationContext);
+        servlet.setTransformWsdlLocations(true);
+        return new ServletRegistrationBean<>(servlet, "/holidayService/*");
+    }
+
+    @Bean(name = "holiday")
     public DefaultWsdl11Definition holiday() {
         DefaultWsdl11Definition definition = new DefaultWsdl11Definition();
         definition.setPortTypeName("HumanResource");
@@ -35,6 +40,5 @@ public class SpringWebService {
         collection.setInline(true);
         return collection;
     }
-
 
 }
