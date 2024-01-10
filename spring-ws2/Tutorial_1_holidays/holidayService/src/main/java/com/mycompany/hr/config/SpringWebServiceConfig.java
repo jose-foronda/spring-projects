@@ -10,8 +10,6 @@ import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
-import java.util.Properties;
-
 @EnableWs
 @Configuration
 public class SpringWebServiceConfig {
