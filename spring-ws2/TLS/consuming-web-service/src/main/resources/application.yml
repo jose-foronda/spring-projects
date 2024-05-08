@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: consuming-web-service
+  ssl:
+    bundle:
+      jks:
+        mybundle:
+          keystore:
+            location: "classpath:keystore-client.p12"
+            password: keystorePass
+            type: PKCS12
+
+server:
+  port: 8080
+  ssl:
+    enabled: true
+    bundle: mybundle
+#    key-store: "classpath:keystore-client.p12"
+#    key-store-password: keystorePass
+#    key-store-type: PKCS12
+logging:
+  level:
+    com.example.consumingwebservice: INFO
+    org:
+      springframework:
+        ws: DEBUG

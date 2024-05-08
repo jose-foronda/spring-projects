@@ -1,0 +1,8 @@
+server:
+  port: 8081
+  ssl:
+    enabled: true
+    key-store: "classpath:keystore-server.p12"
+    key-store-password: keystorePass
+    key-store-type: PKCS12
+    client-auth: need
