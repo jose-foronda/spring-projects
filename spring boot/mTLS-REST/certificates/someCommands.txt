@@ -1,0 +1,56 @@
+mkcert -client localhost 127.0.0.1 ::1 
+
+
+keytool -import -file server.pem -alias serverCA -keystore truststore.p12
+keytool -import -file mkcertRootCA.crt -alias keystore-client -keystore truststore.p12
+
+
+
+keytool -genkeypair -alias server -keyalg RSA -keysize 4096 -validity 365 -dname "CN=Server,OU=Server,O=Examples,L=,S=CA,C=U" -keypass truststorePass -keystore server-keystore.p12 -storeType PKCS12 -storepass truststorePass
+
+keytool -genkeypair -alias client -keyalg RSA -keysize 4096 -validity 365 -dname "CN=Client,OU=Server,O=Examples,L=,S=CA,C=U" -keypass truststorePassClient -keystore client-keystore.p12 -storeType PKCS12 -storepass truststorePassClient
+
+
+-- to create truststore
+keytool -import -file rootCA.pem -alias rootCA -keystore truststore.p12
+keytool -import -file minica.pem -alias rootCA -keystore truststore.p12
+
+---to create keystores
+openssl pkcs12 -export -in client.pem -inkey client-key.pem -out keystore-client.p12 -name "keystore-client"
+openssl pkcs12 -export -in server.pem -inkey server-key.pem -out keystore-server.p12 -name "keystore-server"
+openssl pkcs12 -export -in minica.pem -inkey minica-key.pem -out keystore-minica.p12 -name "keystore-minica"
+
+--- to watch what is contained in the keystore
+keytool -v  -list -keystore keystore-client.p12
+keytool -v  -list -keystore keystore-server.p12
+keytool -v  -list -keystore cacerts
+
+-- to concatenate 2 files into a single file
+type mkcertRootCA.crt client.pem   > hierarchyCertForClient.pem
+type rootCA.pem server.pem   > hierarchyCertForClient.pem
+type client.pem minica.pem   > hierarchyCertForClient.pem
+type server.pem minica.pem   > hierarchyCertForServer.pem
+
+
+https://stackoverflow.com/questions/9299133/why-doesnt-java-send-the-client-certificate-during-ssl-handshake
+keytool -importcert -keystore keystore-client.p12 -alias keystore-client -file hierarchyCertForClient.pem
+keytool -importcert -keystore keystore.p12 -alias server -file hierarchyCertForClient.pem
+keytool -importcert -keystore keystore-server.p12 -alias keystore-server -file hierarchyCertForServer.pem
+keytool -import -alias keystore-client -keystore  keystore-client -file hierarchyCertForClient.pem
+
+keytool -import -file hierarchyCertForClient.pem -alias hierarchyCertForClient -keystore keystore-client.p12
+
+
+openssl pkcs12 -export -in client.pem -inkey client-key.pem  -out keystore-client2.p12 -name keystore-client2 -CAfile mkcertRootCA.pem -caname root
+
+--create certificate using minica
+minica --domains localhost
+
+
+-- to import root cert to the cacerts in C:\Windows\System32\cmd.exe    You will be asked for password which default is changeit.
+https://stackoverflow.com/questions/63482370/unable-to-find-a-valid-certification-path-to-requested-target
+keytool -import -alias minica -keystore  cacerts -file minica.crt
+keytool -import -alias minica -keystore  cacerts -file hierarchyCertForClient.pem ESTE NO SIRVE
+
+keytool -delete -alias minica -keystore cacerts
+

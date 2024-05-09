@@ -1,0 +1,36 @@
+
+*********************************
+I searched in google 
+PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+
+redirects to that forum of that guy who proposed an MR on some tomcat stuff
+https://stackoverflow.com/questions/70575695/cxfpkix-path-building-failed-sun-security-provider-certpath-suncertpathbuilder
+
+says something for jetty but redirects to a solution to tomcat
+https://stackoverflow.com/questions/65890334/configure-spring-boots-with-custom-sslcontext-programmatically-for-mtls
+
+
+
+********************************************
+this was useful to understand
+https://medium.com/@salarai.de/how-to-enable-mutual-tls-in-a-sprint-boot-application-77144047940f
+
+
+this talks about serverSAuth and clientAuth keyextendedUsages
+https://blogshri.wordpress.com/tag/extended-key-usage-does-not-permit-use-for-tls-client-authentication/
+https://stackoverflow.com/questions/17089889/openssl-x509v3-extended-key-usage
+
+some interesting explanation on TLS
+https://stackoverflow.com/questions/40061263/what-is-ca-certificate-and-why-do-we-need-it
+
+
+*******************
+to import CA to the cacerts
+searched as:
+sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+https://stackoverflow.com/questions/63482370/unable-to-find-a-valid-certification-path-to-requested-target
+
+
+******************
+a baeldung example
+https://www.baeldung.com/x-509-authentication-in-spring-security

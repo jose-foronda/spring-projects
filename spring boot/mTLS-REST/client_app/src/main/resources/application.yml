@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: client_app
+  ssl:
+#    bundle:
+#      pem:
+#        mybundle:
+#          keystore:
+#            certificate: "classpath:client.pem"
+#            private-key: "classpath:client-key.pem"
+    bundle:
+      jks:
+        mybundle:
+          keystore:
+            location: "classpath:keystore-client.p12"
+            password: keystorePass
+            type: PKCS12
+#      pem:
+#        mybundle:
+#          truststore:
+#            certificate: "classpath:minica.pem"
+server:
+  port: 8443
+  ssl:
+    enabled: true
+    bundle: mybundle
+#
+#    certificate: "classpath:client.pem"
+#    certificate-private-key: "classpath:client-key.pem"
+
+#    client-auth: need
+
+#    trust-certificate: "classpath:rootCA.pem"
+#    key-password: clientCertPass
+
+#    trust-store: "classpath:truststore.p12"
+#    trust-store-password: truststorePass
+#    trust-store-type: PKCS12
+#-Djavax.net.debug=all
+#    key-store: "classpath:keystore-client.p12"
+#    key-store-password: keystorePass
+#    key-store-type: PKCS12
+#    trust-certificate: "classpath:minica.pem"
+
+server-api:
+  url: https://localhost:8086
+
+feign:
+  server-api:
+    url: ${server-api.url}
+    period: 100
+    duration: 5
+    retryAttempts: 3
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.example.app.client: DEBUG
+    feign: DEBUG
+    javax.net.ssl.trustStore: DEBUG
