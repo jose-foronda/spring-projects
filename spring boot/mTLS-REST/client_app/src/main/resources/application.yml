@@ -15,6 +15,9 @@ spring:
             location: "classpath:keystore-client.p12"
             password: keystorePass
             type: PKCS12
+          truststore:
+            location: "classpath:keystore-with-server-cert.p12"
+            password: truststorePass
 #      pem:
 #        mybundle:
 #          truststore:
