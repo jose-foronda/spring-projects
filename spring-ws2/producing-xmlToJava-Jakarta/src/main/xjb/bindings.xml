@@ -1,0 +1,29 @@
+<jaxb:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               version="2.1">
+    <!-- Raise theEnumMemberSizeCap limit -->
+    <jaxb:bindings>
+        <jaxb:globalBindings typesafeEnumMaxMembers="2000"/>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../resources/xlink.xsd">
+        <jaxb:bindings
+                node="//xs:group[@name='locatorModel']//xs:element[@ref='xlink:title']">
+            <jaxb:property name="locatorModelTitle"/>
+        </jaxb:bindings>
+        <jaxb:bindings
+                node="//xs:group[@name='arcModel']//xs:element[@ref='xlink:title']">
+            <jaxb:property name="arcModelTitle"/>
+        </jaxb:bindings>
+        <jaxb:schemaBindings>
+            <jaxb:package name="client.soap.mortgage.mismo.xlink"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+
+    <jaxb:bindings schemaLocation="../resources/MISMO_3.4.0_B324.xsd">
+        <jaxb:schemaBindings>
+            <jaxb:package name="client.soap.mortgage.mismo"/>
+        </jaxb:schemaBindings>
+    </jaxb:bindings>
+</jaxb:bindings>
