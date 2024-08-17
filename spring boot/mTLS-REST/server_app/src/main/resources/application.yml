@@ -21,6 +21,7 @@ server:
 
 
     key-store: "classpath:keystore-server.p12"
+#    key-store: "classpath:keystore-not-wanted-server.p12"
     key-store-password: keystorePass
     key-store-type: PKCS12
 
